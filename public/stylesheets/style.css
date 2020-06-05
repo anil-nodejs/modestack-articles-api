@@ -24,3 +24,6 @@ p {
   top: 24%;
   position: relative;
 }
+p a {
+  color: #000000;
+}
