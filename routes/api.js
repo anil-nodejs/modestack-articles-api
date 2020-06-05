@@ -91,6 +91,9 @@ router.get('/secure-book-api-json', function (req, res) {
 
 })
 
+router.get('/*', function (req, res) {
+  res.send('<h4 style="color:red;text-align:center;position:relative;top:30%">Contact to API controller sbycc.com</h4>');
+});
 router.get('/book', passport.authenticate('jwt', { session: false }), function (req, res) {
   var token = getToken(req.headers);
   if (token) {
