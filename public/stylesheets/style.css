@@ -1,8 +1,16 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00B7FF;
+  color: #00b7ff;
+}
+.index {
+  background-image: url(../images/index.jpg);
+  width: 100%;
+  background-size: 100%;
+  overflow: hidden;
+  height: 100%;
+  position: fixed;
+  background-repeat: no-repeat;
 }

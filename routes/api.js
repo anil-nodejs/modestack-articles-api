@@ -88,6 +88,7 @@ router.get('/secure-book-api-json', function (req, res) {
     if (err) return next(err);
     res.json(books);
   });
+
 })
 
 router.get('/book', passport.authenticate('jwt', { session: false }), function (req, res) {
