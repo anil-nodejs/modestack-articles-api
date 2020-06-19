@@ -6,7 +6,7 @@ var express = require('express');
 var jwt = require('jsonwebtoken');
 var router = express.Router();
 var User = require("../models/user");
-var Book = require("../models/book");
+var Article = require("../models/article");
 
 router.post('/register', function (req, res) {
   if (!req.body.username || !req.body.password) {
@@ -59,36 +59,33 @@ router.get('/logout', passport.authenticate('jwt', { session: false }), function
   res.json({ success: true, msg: 'Sign out successfully.' });
 });
 
-router.post('/book', passport.authenticate('jwt', { session: false }), function (req, res) {
+router.post('/articles', passport.authenticate('jwt', { session: false }), function (req, res) {
   var token = getToken(req.headers);
   if (token) {
     console.log(req.body);
-    var newBook = new Book({
-      code: req.body.code,
-      className: req.body.className,
-      subject: req.body.subject,
-      unitName: req.body.unitName,
-      subSubject: req.body.subSubject,
-      api_controller: req.body.api_controller
-
+    var newArticles = new Article({
+      title: req.body.title,
+      body: req.body.body,
+      author: req.body.author,
+      access_token: req.body.access_token
     });
 
-    newBook.save(function (err) {
+    newArticles.save(function (err) {
       if (err) {
-        return res.json({ success: false, msg: 'Save book failed.' });
+        return res.json({ success: false, msg: 'Save article failed.' });
       }
-      res.json({ success: true, msg: 'Successful created new book.' });
+      res.json({ success: true, msg: 'Successful created new article.' });
     });
   } else {
     return res.status(403).send({ success: false, msg: 'Unauthorized.' });
   }
 });
 
-// get json book data
-router.get('/secure-book-api-json', function (req, res) {
-  Book.find(function (err, books) {
+// get json article data
+router.get('/articles', function (req, res) {
+  Article.find(function (err, articles) {
     if (err) return next(err);
-    res.json(books);
+    res.json(articles);
   });
 
 })
@@ -97,12 +94,12 @@ router.get('/*', function (req, res) {
   res.send('<h4 style="color:red;text-align:center;position:relative;top:30%">Contact to API controller<br>Mail To: <a href="mailto:sde.anilyadav@gmail.com">sde.anilyadav@gmail.com</h4>');
 });
 
-router.get('/book', passport.authenticate('jwt', { session: false }), function (req, res) {
+router.get('/articles', passport.authenticate('jwt', { session: false }), function (req, res) {
   var token = getToken(req.headers);
   if (token) {
-    Book.find(function (err, books) {
+    Article.find(function (err, articles) {
       if (err) return next(err);
-      res.json(books);
+      res.json(articles);
     });
   } else {
     return res.status(403).send({ success: false, msg: 'Unauthorized.' });
