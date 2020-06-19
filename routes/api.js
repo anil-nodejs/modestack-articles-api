@@ -94,7 +94,7 @@ router.get('/secure-book-api-json', function (req, res) {
 })
 
 router.get('/*', function (req, res) {
-  res.send('<h4 style="color:red;text-align:center;position:relative;top:30%">Contact to API controller sbycc.com<br>Mail To: <a href="mailto:anilyadav@sbytechnocratesindia.com">anilyadav@sbytechnocratesindia.com</h4>');
+  res.send('<h4 style="color:red;text-align:center;position:relative;top:30%">Contact to API controller<br>Mail To: <a href="mailto:sde.anilyadav@gmail.com">sde.anilyadav@gmail.com</h4>');
 });
 
 router.get('/book', passport.authenticate('jwt', { session: false }), function (req, res) {
