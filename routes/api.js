@@ -61,13 +61,14 @@ router.get('/logout', passport.authenticate('jwt', { session: false }), function
 
 router.post('/articles', passport.authenticate('jwt', { session: false }), function (req, res) {
   var token = getToken(req.headers);
+
   if (token) {
     console.log(req.body);
     var newArticles = new Article({
       title: req.body.title,
       body: req.body.body,
       author: req.body.author,
-      access_token: req.body.access_token
+      access_token: token
     });
 
     newArticles.save(function (err) {
