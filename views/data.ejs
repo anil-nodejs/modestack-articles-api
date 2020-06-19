@@ -1,0 +1,10 @@
+        <ul>
+        <%if (table.length >0){ %>
+          <% table.forEach(function(row){ %>
+
+           <div><h4>Title:</h4><%= row.title %></div>
+            <div><h4>Body:</h4><%= row.body %></div>
+            <div><h4>Author:</h4><%= row.author %></div>
+            <hr>
+          <% })} %>       
+       </ul>

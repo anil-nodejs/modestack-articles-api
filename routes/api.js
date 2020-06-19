@@ -59,6 +59,14 @@ router.get('/logout', passport.authenticate('jwt', { session: false }), function
   res.json({ success: true, msg: 'Sign out successfully.' });
 });
 
+router.get('/', function (req, res) {
+  Article.find({}, function (err, data) {
+    res.render('data.ejs', {
+      table: data
+    })
+  })
+})
+
 router.post('/articles', passport.authenticate('jwt', { session: false }), function (req, res) {
   var token = getToken(req.headers);
 
@@ -90,6 +98,7 @@ router.get('/articles', function (req, res) {
   });
 
 })
+
 
 router.get('/*', function (req, res) {
   res.send('<h4 style="color:red;text-align:center;position:relative;top:30%">Contact to API controller<br>Mail To: <a href="mailto:sde.anilyadav@gmail.com">sde.anilyadav@gmail.com</h4>');
