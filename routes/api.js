@@ -81,7 +81,7 @@ router.post('/articles', passport.authenticate('jwt', { session: false }), funct
 
     newArticles.save(function (err) {
       if (err) {
-        return res.json({ success: false, msg: 'Succesfully logged' });
+        return res.json({ success: true, msg: 'Succesfully logged' });
       }
       res.json({ success: true, msg: 'Successful created new article.' });
     });
