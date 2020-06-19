@@ -28,7 +28,7 @@ router.post('/register', function (req, res) {
   }
 });
 
-router.post('/signin', function (req, res) {
+router.post('/login', function (req, res) {
   User.findOne({
     username: req.body.username
   }, function (err, user) {
@@ -54,7 +54,7 @@ router.post('/signin', function (req, res) {
   });
 });
 
-router.get('/signout', passport.authenticate('jwt', { session: false }), function (req, res) {
+router.get('/logout', passport.authenticate('jwt', { session: false }), function (req, res) {
   req.logout();
   res.json({ success: true, msg: 'Sign out successfully.' });
 });
